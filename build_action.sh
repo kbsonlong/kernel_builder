@@ -14,12 +14,14 @@ apt build-dep -y linux
 cd "${GITHUB_WORKSPACE}" || exit
 
 # download kernel source
-wget http://www.kernel.org/pub/linux/kernel/v5.x/linux-"$VERSION".tar.xz
-tar -xf linux-"$VERSION".tar.xz
-cd linux-"$VERSION" || exit
+git clone https://gitee.com/anolis/cloud-kernel.git
+git clone --depth 1 -b 6.6.88-4.1.1 https://gitee.com/anolis/cloud-kernel.git
+cd cloud-kernel || exit
 
 # copy config file
 cp ../config .config
+sed -i 's/5.15.0-84-custom/6.6.88-4.1.1/g' .config
+
 
 # disable DEBUG_INFO to speedup build
 scripts/config --disable DEBUG_INFO
