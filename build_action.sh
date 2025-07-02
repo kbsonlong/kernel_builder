@@ -23,7 +23,6 @@ cp ../config .config
 
 # disable DEBUG_INFO to speedup build
 scripts/config --disable DEBUG_INFO
-
 # apply patches
 # shellcheck source=src/util.sh
 # source ../patch.d/*.sh
