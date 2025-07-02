@@ -14,7 +14,7 @@ jobs:
         run: bash build_action.sh
 
       - name: Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: ${{ github.workspace }}/artifact/
