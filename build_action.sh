@@ -19,12 +19,12 @@ git clone --depth 1 -b 6.6.88-4.1.1 https://gitee.com/anolis/cloud-kernel.git
 cd cloud-kernel || exit
 
 # copy config file
-cp ../config .config
-sed -i 's/5.15.0-84-custom/6.6.88-4.1.1/g' .config
-
+# cp ../config .config
+# sed -i 's/5.15.0-84-custom/6.6.88-4.1.1/g' .config
+make anolis_defconfig
 
 # disable DEBUG_INFO to speedup build
-scripts/config --disable DEBUG_INFO
+# scripts/config --disable DEBUG_INFO
 # apply patches
 # shellcheck source=src/util.sh
 # source ../patch.d/*.sh
@@ -32,6 +32,9 @@ scripts/config --disable DEBUG_INFO
 # build deb packages
 CPU_CORES=$(($(grep -c processor < /proc/cpuinfo)*2))
 make deb-pkg -j"$CPU_CORES"
+if [ $? != 0 ];then
+  make -j"$CPU_CORES"
+fi
 
 # move deb packages to artifact dir
 cd ..
