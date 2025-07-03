@@ -31,7 +31,7 @@ make anolis_defconfig
 
 # build deb packages
 CPU_CORES=$(($(grep -c processor < /proc/cpuinfo)*2))
-make deb-pkg -j"$CPU_CORES"
+# make deb-pkg -j"$CPU_CORES"
 if [ $? != 0 ];then
   make -j"$CPU_CORES"
 fi
